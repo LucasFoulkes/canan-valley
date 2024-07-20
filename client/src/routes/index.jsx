@@ -67,7 +67,7 @@ const DataRenderer = ({ data }) => {
 const HomePage = () => {
     const { isLoading, error, data } = useQuery({
         queryKey: ['apiData'],
-        queryFn: () => fetch('http://0.0.0.0:8000/payments_per_day').then((res) => res.json()),
+        queryFn: () => fetch('/api/tables').then((res) => res.json()),
     });
 
     if (isLoading) return <p>Loading...</p>;
