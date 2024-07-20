@@ -1,0 +1,26 @@
+{
+  "name": "canan-valley",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+    "scripts": {
+      "start": "node server/server.js",
+      "server": "nodemon server/server.js",
+      "client": "cd client && npm run dev",
+      "dev": "concurrently \"npm run server\" \"npm run client\"",
+      "build": "cd client && npm run build"
+    },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.1.4"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mssql": "^11.0.1"
+  }
+}
