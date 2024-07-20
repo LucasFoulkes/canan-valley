@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/Button";
+import "./App.css";
 
 function App() {
   const [tables, setTables] = useState([]);
@@ -31,16 +33,7 @@ function App() {
 
   return (
     <div>
-      <h1>Database Tables</h1>
-      {tables.length === 0 ? (
-        <p>Loading...</p>
-      ) : (
-        <ul>
-          {tables.map((table) => (
-            <li key={table}>{table}</li>
-          ))}
-        </ul>
-      )}
+      <Button>hello world</Button>
     </div>
   );
 }
