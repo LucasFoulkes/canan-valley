@@ -1,22 +1,18 @@
 const express = require("express");
 const sql = require("mssql");
 const path = require("path");
+const clientsRouter = require("./routes/clients");
+const tablesRouter = require("./routes/tables");
+const config = require("./config");
 
 const app = express();
 
-const config = {
-  server: "cananvalle.database.windows.net",
-  database: "base_cananvalle",
-  user: "Administrador",
-  password: "Amn110**",
-  options: {
-    encrypt: true,
-    trustServerCertificate: false,
-  },
-};
-
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, "../client/dist")));
+
+// Use routers
+app.use("/api", clientsRouter);
+app.use("/api", tablesRouter);
 
 app.get("/api/connection-test", async (req, res) => {
   try {
@@ -26,26 +22,6 @@ app.get("/api/connection-test", async (req, res) => {
   } catch (err) {
     console.error("Database connection error:", err);
     res.status(500).send("Failed to connect to the database");
-  } finally {
-    await sql.close();
-  }
-});
-
-app.get("/api/tables", async (req, res) => {
-  try {
-    await sql.connect(config);
-    const result = await sql.query`
-      SELECT TABLE_NAME
-      FROM INFORMATION_SCHEMA.TABLES
-      WHERE TABLE_TYPE = 'BASE TABLE'
-    `;
-    console.log("Tables fetched successfully!");
-    res.json(result.recordset.map((record) => record.TABLE_NAME));
-  } catch (err) {
-    console.error("Error fetching tables:", err);
-    res
-      .status(500)
-      .json({ error: "An error occurred while fetching table names" });
   } finally {
     await sql.close();
   }
