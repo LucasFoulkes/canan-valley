@@ -1,6 +1,5 @@
-import React from 'react';
-import { Outlet, Link } from '@tanstack/react-router';
-import { Home, Info } from "lucide-react";
+import { Outlet, Link } from "@tanstack/react-router";
+import { Home } from "lucide-react";
 
 export default function App() {
   return (
